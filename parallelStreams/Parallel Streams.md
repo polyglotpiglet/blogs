@@ -43,10 +43,10 @@ public class StreamDoc {
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void cat(StreamState state) {
-        state.longs.parallelStream()
-       	 .map(x -> x * x)
-       	 .mapToLong(x -> x)
-       	 .sum();
+        return state.longs.parallelStream()
+       	 	.map(x -> x * x)
+       	 	.mapToLong(x -> x)
+       	 	.sum();
     }
 
     public static void main(String... args) throws RunnerException {
@@ -66,31 +66,8 @@ public class StreamDoc {
 
 I have executed this benchmark several times with different values of n, and for each n I have run it with longs.stream() and longs.parallelStream(). 
 
-The results are in the following tables. 
+The results are in the following tables. All the times are in seconds. 
 
-
-***
-
-n = 10\_000\_000
-
-| | min | avg  | max |  stdev |
-| ------------- | ------------- | ------------- | ------------- | ------------- | 
-| **stream()** | 162.489 | 174.841 | 202.039 | 8.740
-| **parallelStream()** | 140.750 | 148.792 | 155.405 | 3.693
-
-Yay, as expected the parallel stream performs better. 
-
-***
-
-n = 1\_000\_000
-
-
-| | min | avg | max |  stdev |
-| ------------- | ------------- | ------------- | ------------- | ------------- | 
-| **stream()** | 8.021 | 8.684 | 9.400 | 0.427
-| **parallelStream()** |  8.010 | 8.075 | 8.246 | 0.058
-
-Parallel stream is a still definitely faster. 
 
 ***
 
@@ -98,10 +75,10 @@ n = 100\_000
 
 | | min | avg | max |  stdev |
 | ------------- | ------------- | ------------- | ------------- | ------------- | 
-| **stream()** | 0.761 | 0.846 | 0.955 | 0.055
-| **parallelStream()** | 0.746 | 0.772| 0.854 | 0.028
+| **stream()** | 1.460 | 1.826 | 2.028 | 0.149
+| **parallelStream()** | 0.559 | 0.680| 0.796 | 0.060
 
-Still looking good
+Woohoo, parallel stream behaves as it should and improves the performance. 
 
 ***
 
@@ -109,10 +86,10 @@ n = 10\_000
 
 | | min | avg | max |  stdev |
 | ------------- | ------------- | ------------- | ------------- | ------------- | 
-| **stream()** | 0.062 | 0.065 | 0.071 | 0.003
-| **parallelStream()** | 0.071 | 0.081 | 0.092 | 0.007
+| **stream()** | 0.125 | 0.151 | 0.203 | 0.022
+| **parallelStream()** | 0.082 | 0.094 | 0.107 | 0.007
 
-Uh oh - for 10_000 longs the parallel stream is slower. 
+Still got a definite performance benefit with the parallel stream. 
 
 ***
 
@@ -121,17 +98,47 @@ n = 1\_000
 
 | | min | avg | max |  stdev |
 | ------------- | ------------- | ------------- | ------------- | ------------- | 
-| **stream()** | 0.005 | 0.006 | 0.007 | 0.001
+| **stream()** | 0.014 | 0.015 | 0.018 | 0.001
 | **parallelStream()** | 0.023 | 0.024 | 0.026 | 0.001
 
-Now with only 1000 elements using the parallel stream takes about x4 as long as the sequential execution. 
+Now with only 1000 elements using the parallel stream is a bit slower than with the sequential stream. 
 
 ***
+
+
+n = 100 
+
+| | min | avg | max |  stdev |
+| ------------- | ------------- | ------------- | ------------- | ------------- | 
+| **stream()** | 0.002 | 0.002 | 0.002 | 0.001
+| **parallelStream()** | 0.017 | 0.019 | 0.020 | 0.001
+
+Wow it's about x10 slower!
+
+***
+
   
-## Type of the underlying collection
+## 2. Type of the underlying collection
 
-## ForkJoinPool
+I ran the n = 1\_000\_000 test again twice. Both times with the parallelStream. The difference between the two runs was that the first time was like the original where the underlying collection is a `LinkedList` but for the second run I changed to an `ArrayList`.  
 
- 
+| | min | avg | max |  stdev |
+| ------------- | ------------- | ------------- | ------------- | ------------- | 
+| **LinkedList** | 8.073 | 8.186 | 8.427 | 0.098
+| **ArrayList** | 2.988 | 3.245 | 3.994 | 0.248
+
+ As we can see, the `ArrayList` is considerably quicker. This is mostly because splitting an `ArrayList` into chunks can be done with _O(1)_ time complexity, but splitting a `LinkedList` is _O(n)_.
+
+## 4. ForkJoinPool
+
+Parallel stream execution use the default forkJoinPool which means that unless you do something about it all your `.parallelStream()` usages within an application will use the same underlying thread pool. Imagine if you were to do the following? 
+
+```java
+blah.parallelStream().map(v -> longBlockingCall(v))
+```
+
+You will block the threads and potentially slow down some completely different part of your application!
+
+A way round it is described in [this](http://stackoverflow.com/questions/21163108/custom-thread-pool-in-java-8-parallel-stream) stack overflow thread. 
   
   
