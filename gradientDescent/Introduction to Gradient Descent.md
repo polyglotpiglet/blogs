@@ -2,7 +2,7 @@
 
 ## Example Training Set
 
-Imagine we have some correlated data []
+Imagine we have some correlated data ![](xiyi.png) with the following values:
 
 ```
 x = [1, 1.1, 0.8, 0.2, 1.2, 0.9, 1.1, 1.2, 0.4, 0.7, 0.8, 0.6]
@@ -20,7 +20,7 @@ This will be some line of the following form:
 
 <div style="text-align:center"><img src ="equationOfALine.png" /></div>
 
-For a given ![](theta1.png) and ![](theta2.png), and where _m_ is the size of the data set, we define a _cost_ function:
+For a given ![](theta1.png) and ![](theta2.png), and where _m_ is the size of the data set, we define a _cost_ function, which is a measure of how well the line fits the data:
 
 <div style="text-align:center"><img src ="costFunction.png" /></div>
 
@@ -38,9 +38,70 @@ Intuitively, we want to find the minimum of the cost function, which will give u
 
 ## Gradient Descent Algorithm
 
-1. Choose a random point 
-2. Check the gradient at this point
-3. Take a step in the right direction
+Choose a random line, eg ![](startingLine.png)
+
+Then the gradient descent algorithm is the following: 
+
+![](gradientDescentAlgorithm.png)
+
+Let's calculate these partial derivatives: 
+
+
+
+<div style="text-align:center"><img src ="partialDerivatives.png" /></div>
+
+(Hopefully now you can see why we had that factor of 2 in the cost factor denominator. It neatened up the partial derivatives nicely.)
+
+## Implementation of Gradient Descent Algorithm
+
+```scala
+ val file = new File("/Users/alexbate/polyglotpiglet/blogs/gradientDescent/results/alphaZeroPoint1AndIterationsEquals100.txt")
+  val bw = new BufferedWriter(new FileWriter(file))
+
+  val alpha = 0.1
+  val (theta1, theta2) = (0 to 100)
+  							.foldLeft((0.0, 0.0)){ case ((t1, t2), _) => {
+    	bw.write(computeCost(t1, t2).toString + "\n")
+    	(nextTheta1(t1, t2, alpha, xs, ys), nextTheta2(t1, t2, alpha, xs, ys))
+  }}
+  bw.close()
+
+  println(s"Theta1: $theta1, Theta2: $theta2")
+
+  def y(theta1: Double, theata2: Double, x: Double): Double = theta1 + theata2 * x
+
+  def nextTheta1(theta1: Double, 
+  					theta2: Double, 
+  					alpha: Double, 
+  					xs: Array[Double], 
+  					ys: Array[Double]): Double = {
+    val partial = xs.zip(ys)
+    				.map(pair => y(theta1, theta2, pair._1) - pair._2)
+    				.sum / xs.length
+    theta1 - alpha * partial
+  }
+
+  def nextTheta2(theta1: Double, 
+  					theta2: Double, 
+  					alpha: Double, 
+  					xs: Array[Double], 
+  					ys: Array[Double]): Double = {
+    val partial = xs.zip(ys)
+    				.map(pair => (y(theta1, theta2, pair._1) - pair._2) * pair._1)
+    				.sum / xs.length
+    theta2 - alpha * partial
+  }
+```
+
+## Results
+
+I plotted the value of the cost values for each iteration: 
+
+<div style="text-align:center"><img src ="results/alphaZeroPointOneIterationsOneHundred.png" /></div>
+
+We can see that the cost value converges quickly towards a minimum. 
+
+Running for 1000 iterations the end values of ![](theta1.png) and ![](theta2.png) are `0.2400644855654001` and `0.7169998055099603` respectively. This will be interesting for when we come to compute them analytically in a later post. 
 
 ## Code for Calculating Cost Function
 
