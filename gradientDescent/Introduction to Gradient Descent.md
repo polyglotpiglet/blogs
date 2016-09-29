@@ -101,7 +101,7 @@ I plotted the value of the cost values for each iteration:
 
 We can see that the cost value converges quickly towards a minimum. 
 
-Running for 1000 iterations the end values of ![](theta1.png) and ![](theta2.png) are `0.2400644855654001` and `0.7169998055099603` respectively. This will be interesting for when we come to compute them analytically in a later post. 
+Running for 10000 iterations the end values of ![](theta1.png) and ![](theta2.png) are `0.238855421686753` and `0.7183734939758966` respectively. This will be interesting for when we come to compute them analytically in a later post. 
 
 ## Code for Calculating Cost Function
 
