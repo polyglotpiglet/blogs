@@ -1,0 +1,4 @@
+y_1 = \theta_0 + \theta_1 x_{1,1} + ... + \theta_nx_{1,n} \\ 
+y_2 = \theta_0 + \theta_1 x_{2,1} + ... + \theta_nx_{2,n} \\
+\vdots  \\
+y_m &=& \theta_0 + \theta_1 x_{m,1} + ... + \theta_nx_{m,n} \\

@@ -1,0 +1,4 @@
+repeat \ until \ convergence \ \{ \\ \\
+\theta_1 = \theta_1 - \alpha \frac{\partial}{\partial \theta_1} J (\theta_1, \theta_2) \\ \\
+\theta_2 = \theta_2 - \alpha \frac{\partial}{\partial \theta_2} J (\theta_1, \theta_2) \\ \\
+\}

@@ -1,0 +1,4 @@
+\hat{Y} = \hat{X} \cdot \hat{\theta} \\ \\
+=> \hat{X}^{\intercal} \cdot \hat{Y} = \hat{X}^{\intercal} \cdot \hat{X} \cdot \hat{\theta} \\ \\
+=> (\hat{X}^{\intercal} \cdot \hat{X})^{-1} \cdot \hat{X}^{\intercal} \cdot \hat{Y} = I \cdot \hat{\theta} \\ \\
+=> \hat{\theta} = (\hat{X}^{\intercal} \cdot \hat{X})^{-1} \cdot \hat{X}^{\intercal} \cdot \hat{Y}

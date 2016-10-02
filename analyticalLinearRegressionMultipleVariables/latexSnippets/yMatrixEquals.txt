@@ -1,0 +1,5 @@
+\[ \hat{Y} = \left( \begin{array}{c}
+y_1 \\
+y_2 \\
+\vdots \\
+y_m  \end{array} \right)
