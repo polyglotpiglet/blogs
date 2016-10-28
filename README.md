@@ -11,6 +11,8 @@
 
 [Introduction to Gradient Descent] (<https://github.com/polyglotpiglet/blogs/blob/master/gradientDescent/Introduction%20to%20Gradient%20Descent.md>)
 
+[Multivariate Gradient Descent] (<https://github.com/polyglotpiglet/blogs/blob/master/multivariateGradientDescent/Multivariate.md>)
+
 [Linear Regression: Analytical Solution with Matrices](<https://github.com/polyglotpiglet/blogs/blob/master/analyticalLinearRegressionMultipleVariables/Linear%20Regression%20with%20multiple%20parameters%20solved%20analytically.md>)
 
 [Introduction to Logistic Regression](<https://github.com/polyglotpiglet/blogs/blob/master/logisticRegression/Introduction%20to%20Logistic%20Regression%20(probability%20of%20binary%20result).md>)
