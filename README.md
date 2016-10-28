@@ -1,5 +1,9 @@
 # blogs
 
+I do actually have an actual blogspot [blog](<alexandrastech.blogspot.com>). The suff I put on there tends to be silly little examples that I want to remember. I usually only give the minimum amount of information for something to be useful for me in the future. 
+
+This repo contains articles, things that I have tried to write sort of sensibly that someone else might be able to understand.  
+
 ### JVM
 
 [Parallel Streams] (<https://github.com/polyglotpiglet/blogs/blob/master/parallelStreams/Parallel%20Streams.md>)
