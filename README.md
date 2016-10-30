@@ -21,6 +21,8 @@ This repo contains articles, things that I have tried to write sort of sensibly 
 
 [Introduction to Logistic Regression](<https://github.com/polyglotpiglet/blogs/blob/master/machineLearning/logisticRegression/Introduction%20to%20Logistic%20Regression%20(probability%20of%20binary%20result).md>)
 
+[Overfitting and Regularision with Gradient Descent](<https://github.com/polyglotpiglet/blogs/blob/master/machineLearning/overfitting/Overfitting.md>)
+
 ### Random Tools and Automation
 
 [Automating Setup of Local Environment](<https://github.com/polyglotpiglet/blogs/blob/master/automatingSetup/Automating%20Setup%20of%20Local%20Environment-%20Why%20bother%3F%20.md>)
