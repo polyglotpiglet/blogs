@@ -1,1 +1,1 @@
-J(\theta) = \frac{1}{2m}\sum_{n=0}^m [l(x_i) - y_i]^2
+J(\theta) = \frac{1}{2m}\sum_{i=1}^m [l_\theta(x_i) - y_i]^2

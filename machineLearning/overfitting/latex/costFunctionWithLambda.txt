@@ -1,0 +1,1 @@
+J(\theta) = \frac{1}{2m}[\sum_{i=1}^m [l_\theta(x_i) - y_i]^2 + \lambda\sum_{i=2}^{n}\theta_i]

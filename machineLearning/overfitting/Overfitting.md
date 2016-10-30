@@ -50,13 +50,27 @@ Now that we want to incorporate the value of theta into our cost we modify this 
 
 <div style="text-align:center"><img src ="adjustedCostFunction.png" /></div>
 
-Note that by convention we actually normally don't count ![](theta1.png) in this sum at the end.
+(By convention we actually normally don't actually count ![](theta1.png) in this sum at the end.)
 
+Adding this to the code gives the follow results: 
+
+```
+theta1 = 0.6594877243621584
+theta2 = 0.03778754581558629
+theta3 = 0.05220543519399138
+theta4 = 0.06108840438854901
+theta5 = 0.06885987803760692
+```
+
+<div style="text-align:center"><img src ="curveWithRegularisation.png" /></div>
+
+This is a much better fit, even though the cost is a little higher (0.015307464675336759).
 
 ### Code
 
 ```scala
- val alpha = 0.01
+  val alpha = 0.01
+  val lambda = 10
 
   val xs = Array(1,1.1,0.8,0.2,1.2,0.9,1.1, 1.2,0.4, 0.7, 0.8, 0.6)
                   .map(x => Array(1, x, math.pow(x, 2), math.pow(x, 3), math.pow(x, 4)))
@@ -79,7 +93,10 @@ Note that by convention we actually normally don't count ![](theta1.png) in this
                 xs: Array[Array[Double]],
                 ys: Array[Double]): Double = {
     val sum = xs.zip(ys).map{ case (x, y) => (yEquals(theta, x) - y) * x(index) }.sum
-    theta(index) - (alpha * sum) / ys.length
+    index match {
+      case 0 => theta(index) - (alpha * sum) / ys.length
+      case _ => theta(index) * (1 - alpha * lambda / ys.length) - (alpha * sum) / ys.length
+    }
   }
 
   def computeCost(theta: Array[Double], xs: Array[Array[Double]]): Double = {
@@ -89,5 +106,4 @@ Note that by convention we actually normally don't count ![](theta1.png) in this
       .map(math.pow(_, 2))
       .sum
     summedSquareDiffs / (2 * xs.length)
-  }
-```
+  }```
