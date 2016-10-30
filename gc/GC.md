@@ -16,7 +16,7 @@ By default this flag isn't set. It applies to both major and minor GCs.
 
 In terms of GC, throughput is the amount of time spent executing application code. 1-throughput is the time spent in GC. 
 
-<div style="text-align:center"><img src ="throughputgoalEquals.png" /></div>
+<div style="text-align:center"><img src ="throughputGoalEquals.png" /></div>
 
 GCTimeRatio's default value is 19. This means that the application will spend x19 the amount of time in application code as it does running gc (ie 95% throughput). 
 

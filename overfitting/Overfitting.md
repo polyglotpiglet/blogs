@@ -36,7 +36,22 @@ Oh no! Although this has fit the training set quite well, it's actually going to
 
 This problem is 'overfitting'. 
 
-### How to solve
+### How to solve: Regularision
+
+Basically we want to find small values for theta, which make the result less prone to overfitting. To ensure we find small values for theta, we should make theta part of our cost function. 
+
+Previously this was our cost: 
+
+<div style="text-align:center"><img src ="costFunction.png" /></div>
+
+(where the number of data points in the training set = m)
+
+Now that we want to incorporate the value of theta into our cost we modify this function: 
+
+<div style="text-align:center"><img src ="adjustedCostFunction.png" /></div>
+
+Note that by convention we actually normally don't count ![](theta1.png) in this sum at the end.
+
 
 ### Code
 
