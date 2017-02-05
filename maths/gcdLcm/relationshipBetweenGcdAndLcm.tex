@@ -1,0 +1,23 @@
+$\textrm{Two integers, n and m, can be expressed in terms of their prime factors:}$ \\ \\
+\begin{gather*}
+n = \prod_{i}p_i^{e_i} \\ \\
+m = \prod_{i}p_i^{f_i} \\ \\
+\end{gather*}
+
+$\textrm{The greatest common divisor of n and m can be expressed in the following way: }$ \\ \\
+\begin{gather*}
+gcd(n,m) = \prod_{i}p_i^{min(e_i, f_i)} \\ \\
+\end{gather*}
+
+$\textrm{Similarly, the lowest common divisor of n and m can be expressed: }$ \\ \\
+\begin{gather*}
+lcm(n,m) = \prod_{i}p_i^{max(e_i, f_i)} \\ \\
+\end{gather*}
+
+$\textrm{Consider the product, gcd(n,m) * lcm(n,m) }$ \\ \\
+\begin{gather*}
+gcd(m,n) * lcm(n,m) = \prod_{i}p_i^{min(e_i, f_i) + max(e_i, f_i)} 
+ = \prod_{i}p_i^{e_i + f_i}
+ = \prod_{i}p_i^{e_i}p_i^{f_i} = n * m\\ \\
+\end{gather*}
+
