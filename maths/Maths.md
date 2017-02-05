@@ -2,4 +2,4 @@
 
 ### Relationship between GCD and LCM 
 
-![StartingPoint](identicalClassesExceptTheNames.png)
+![Proof](https://github.com/polyglotpiglet/blogs/blob/master/maths/gcdLcm/relationshipBetweenGcdAndLcm.png)
