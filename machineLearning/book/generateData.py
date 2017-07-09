@@ -22,6 +22,25 @@ class Data:
         xs, ys = zip(*self.blueCoordinates)
         return (xs, ys)
 
+    def max_y_coordinate(self):
+        x1s, y1s = self.blue_coordinates()
+        x2s, y2s = self.red_coordinates()
+        return max(max(y1s), max(y2s))
+
+    def max_x_coordinate(self):
+        x1s, y1s = self.blue_coordinates()
+        x2s, y2s = self.red_coordinates()
+        return max(max(x1s), max(x2s))
+
+    def min_y_coordinate(self):
+        x1s, y1s = self.blue_coordinates()
+        x2s, y2s = self.red_coordinates()
+        return min(min(y1s), min(y2s))
+
+    def min_x_coordinate(self):
+        x1s, y1s = self.blue_coordinates()
+        x2s, y2s = self.red_coordinates()
+        return min(min(x1s), min(x2s))
 
 def generate_xs_and_ys(mean, covariance, n):
     """We sample the distribution <n> times to generate <n> coordinates
@@ -47,9 +66,11 @@ def plot_generated_means(data):
     plt.show()
 
 def analyse_data(data): 
-    means1, means2 = generatedMeans
-    print(sorted(means1))
+    print(data.max_x_coordinate())
+    print(data.min_x_coordinate())
+    print(data.max_y_coordinate())
+    print(data.min_y_coordinate())
 
 
 
-plot_generated_means(generate_blue_and_red_coordinates())
+analyse_data(generate_blue_and_red_coordinates())
