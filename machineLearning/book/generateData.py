@@ -3,6 +3,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+numberOfMeans = 100
+
 class Data:
 
     """Holder for two sets of (x,y) 2D coordinates sampled from two difference
@@ -20,18 +22,15 @@ class Data:
         xs, ys = zip(*self.blueCoordinates)
         return (xs, ys)
 
-        
 
-numberOfMeans = 100
-
-# We sample the distribution <howMany := n> times to generate <howMany> 'mean'
-# points, [(x_1, y_1), ... , (x_n, y_n)]
-def generate_xs_and_ys(mean, covariance, howMany):
-    x, y = np.random.multivariate_normal(mean, covariance, howMany).T
+def generate_xs_and_ys(mean, covariance, n):
+    """We sample the distribution <n> times to generate <n> coordinates
+    [(x_1, y_1), ... , (x_n, y_n)]"""
+    x, y = np.random.multivariate_normal(mean, covariance, n).T
     return list(zip(x, y))
 
-# We sample 2 distributions
-def generate_means():
+def generate_blue_and_red_coordinates():
+    """sample two distributions to get the data"""
     mean1 = [1, 0]
     mean2 = [0, 1]
     covariance = [[1, 0], [0, 1]]
@@ -40,7 +39,7 @@ def generate_means():
     return Data(xy1s, xy2s)
 
 def plot_generated_means(data):
-    """be a cat"""
+    """plot the red and blue coordinates on the same graph"""
     x1s, y1s = data.blue_coordinates()
     x2s, y2s = data.red_coordinates()
     plt.plot(x1s, y1s, 'r.', x2s, y2s, 'b.')
@@ -53,4 +52,4 @@ def analyse_data(data):
 
 
 
-plot_generated_means(generate_means())
+plot_generated_means(generate_blue_and_red_coordinates())
