@@ -14,32 +14,32 @@ class Data:
     def __init__(self, blueCoordinates, redCoordinates):
         self.blueCoordinates = blueCoordinates
         self.redCoordinates = redCoordinates
-        _blue_xs, _blue_ys = zip(*self.blueCoordinates)
-        _red_xs, _red_ys = zip(*self.redCoordinates)
+        _blue_xs, _blue_ys = self.blueCoordinates.T
+        _red_xs, _red_ys = self.redCoordinates.T
         self._blue_xs = _blue_xs
         self._blue_ys = _blue_ys
         self._red_xs = _red_xs
         self._red_ys = _red_ys
 
     def red_coordinates(self):
-        xs, ys = zip(*self.redCoordinates)
+        xs, ys = self.redCoordinates.T
         return (xs, ys)
 
     def blue_coordinates(self):
-        xs, ys = zip(*self.blueCoordinates)
+        xs, ys = self.blueCoordinates.T
         return (xs, ys)
 
     def max_y_coordinate(self):
-        return max(max(self._blue_ys), max(self._red_ys))
+        return max(self._blue_ys.max(), self._red_ys.max())
 
     def max_x_coordinate(self):
-        return max(max(self._blue_xs), max(self._red_xs))
+        return max(self._blue_xs.max(), self._red_xs.max())
 
     def min_y_coordinate(self):
-        return min(min(self._blue_ys), min(self._red_ys))
+        return min(self._blue_ys.min(), self._red_ys.min())
 
     def min_x_coordinate(self):
-        return min(min(self._blue_xs), min(self._red_xs))
+        return min(self._blue_xs.min(), self._red_xs.min())
 
 
 def generate_xs_and_ys(mean, covariance, n):
@@ -47,8 +47,7 @@ def generate_xs_and_ys(mean, covariance, n):
     """We sample the distribution <n> times to generate <n> coordinates
     [(x_1, y_1), ... , (x_n, y_n)]"""
 
-    x, y = np.random.multivariate_normal(mean, covariance, n).T
-    return list(zip(x, y))
+    return np.random.multivariate_normal(mean, covariance, n)
 
 
 def generate_blue_and_red_coordinates():
