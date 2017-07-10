@@ -82,9 +82,9 @@ def generate_points_to_analyse(data):
     min_y = data.min_y_coordinate()
     x_interval = (data.max_x_coordinate() - min_x) / numberOfObservations
     y_interval = (data.max_y_coordinate() - min_y) / numberOfObservations
-    for i in range(0, numberOfObservations):
-        for j in range(0, numberOfObservations):
-            yield(min_x + i * x_interval, min_y + j * y_interval)
+    return [(min_x + i * x_interval, min_y + j * y_interval)
+            for i in range(numberOfObservations)
+            for j in range(numberOfObservations)]
 
 
 def plot_points_to_test_and_actual_data(data, observations):
