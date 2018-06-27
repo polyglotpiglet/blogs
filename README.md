@@ -8,7 +8,7 @@ This repo contains articles, things that I have tried to write sort of sensibly 
 
 [Parallel Streams] (<https://github.com/polyglotpiglet/blogs/blob/master/jvm/parallelStreams/Parallel%20Streams.md>)
 
-[GD] (<https://github.com/polyglotpiglet/blogs/blob/master/jvm/gc/GC.md>)
+[GC] (<https://github.com/polyglotpiglet/blogs/blob/master/jvm/gc/GC.md>)
 
 
 ### Machine Learning
