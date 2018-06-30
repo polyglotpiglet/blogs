@@ -61,6 +61,24 @@ And finally:
   } yield i * j * k * l
 ```
 
+**A final beautiful example**
+
+```scala
+
+  def liftFutureOption[T](fo: Future[Option[T]]): OptionT[Future, T] = OptionT(fo)
+  def liftFuture[T](f: Future[T]): OptionT[Future, T] = f.liftM[OptionT]
+  def liftOption[T](o: Option[T]): OptionT[Future, T] = OptionT(o.pure[Future])
+  def lift[T](t: T): OptionT[Future, T] = liftOption(Option(t))
+
+  for {
+    i <- fo1 |> liftFutureOption
+    j <- fo2 |> liftFutureOption
+    k <- fo3 |> liftFuture
+    l <- fo4 |> liftOption
+    m <- 5   |> lift
+  } yield i * j * k * l * m
+```
+
 **Notes**
 
 build.sbt
